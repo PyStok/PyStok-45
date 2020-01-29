@@ -1,0 +1,59 @@
+---
+repos:
+  - repo: git://github.com/jorisroovers/gitlint
+    rev: v0.12.0
+    hooks:
+      - id: gitlint
+        name: (git) -- commit message linter
+
+
+  - repo: git://github.com/psf/black
+    rev: 19.10b0
+    hooks:
+      - id: black
+        name: (python) -- format the code
+
+
+  - repo: git://github.com/pre-commit/pre-commit-hooks
+    rev: v2.4.0
+    hooks:
+      - id: check-case-conflict
+        name: (filesystem) -- forbid to commit case-sensitivity conflicts
+      - id: check-symlinks
+        name: (filesystem) -- forbid to commit empty symlinks
+      - id: check-yaml
+        name: (code) -- verify yaml syntax
+      - id: end-of-file-fixer
+        name: (code) -- fix end of lines
+      - id: trailing-whitespace
+        name: (code) -- fix trailing spaces
+      - id: forbid-new-submodules
+        name: (git) -- forbid submodules to be added
+      - id: no-commit-to-branch
+        name: (git) -- forbid commiting to the branches
+        args: [-b develop, -b master]
+      - id: check-merge-conflict
+        name: (git) -- forbid merge conflicts to be commited
+      - id: requirements-txt-fixer
+        name: (python) -- sort requirements-txt
+      - id: fix-encoding-pragma
+        name: (python) -- add missing pragma
+      - id: check-executables-have-shebangs
+        name: (security) -- verify if executables have shebangs
+      - id: detect-private-key
+        name: (security) -- detect private key
+
+
+  - repo: git://github.com/Yelp/detect-secrets
+    rev: v0.13.0
+    hooks:
+      - id: detect-secrets
+        name: (security) -- detect secrets in the code
+
+
+  - repo: git://github.com/PyCQA/bandit
+    rev: 1.6.2
+    hooks:
+      - id: bandit
+        files: example/
+        name: (security) -- scan the code with bandit
